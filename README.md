@@ -5,8 +5,8 @@
 4. It also as has a profile page to show the informations about the current user.
 
 # TECH STACK
-1. React
-2. Taiwlind CSS
-3. IndexedDB as Database (Client Side)
-4. ShadCN UI Library
-5. ReCharts used through ShadCN
+1. Typescript
+2. React
+3. Taiwlind CSS
+4. IndexedDB as Database (Client Side)
+5. ShadCN UI Library
