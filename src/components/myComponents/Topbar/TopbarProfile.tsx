@@ -52,6 +52,9 @@ function TopbarProfile(){
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem onClick={()=>{
+                                navigate('/dashboard')
+                            }}>Dashboard</DropdownMenuItem>
+                            <DropdownMenuItem onClick={()=>{
                                 navigate('/profile')
                             }}>Profile</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{
