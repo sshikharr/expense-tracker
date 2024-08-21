@@ -57,7 +57,7 @@ export function Signup() {
     const objectStore = transaction.objectStore("users");
     const addRequest = objectStore.add(user);
 
-    addRequest.onsuccess = function (event) {
+    addRequest.onsuccess = function () {
       localStorage.setItem("storedUser", JSON.stringify(user));
       setNewUser(user);
       setCurrentSession(true);
