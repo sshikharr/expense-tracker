@@ -104,7 +104,7 @@ function Signin() {
         <Topbar />
         <div className="w-screen flex flex-col items-center gap-2 py-40">
           <div className="flex flex-col items-center gap-2">
-            <h1 className="text-3xl font-bold">Create an account</h1>
+            <h1 className="text-3xl font-bold">Sign in yo your account</h1>
             <p className="text-gray-600 w-2/3 text-center text-xs md:text-base">
               Get started with our financial dashboard today.
             </p>
