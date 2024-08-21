@@ -20,10 +20,10 @@ function LandingPage() {
     <>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
         <MyMenubar1 onClick={handleScroll} />
-        <div className="md:h-screen md:flex md:flex-row w-screen justify-center mt-4 bg-gradient-to-br from-orange-400 to-purple-400 min-h-screen dark:from-slate-950 dark:to-slate-950">
+        <div className="md:h-screen md:flex md:flex-row w-screen justify-center mt-4 bg-gradient-to-br from-orange-400 to-purple-400 min-h-screen dark:from-slate-950 dark:to-slate-950 py-8">
           <div className="flex flex-col h-full md:justify-center md:px-10 md:gap-4 md:w-1/2 gap-8 w-full">
             <div className="md:text-5xl font-bold text-4xl">
-              <h1 className="text-center md:text-start">Take control of your expenses</h1>
+              <h1 className="text-center md:text-start mt-8">Take control of your expenses</h1>
             </div>
             <div className="break-words">
               <p className="text-center md:text-start mx-2">
