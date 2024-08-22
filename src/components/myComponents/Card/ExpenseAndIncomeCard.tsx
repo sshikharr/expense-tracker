@@ -231,45 +231,45 @@ function ExpenseAndIncomeCard() {
                 amount: amount,
                 description: description,
               };
-              const isOvershootingBudget = (category: string, amount: number, budget: number) => {
+              const isOvershootingBudget = (amount: number, budget: number) => {
       return amount > budget;
     };
 
     if (newTransaction.type === "expense") {
       switch (newTransaction.category) {
         case "entertainment":
-          if (isOvershootingBudget("entertainment", entAmount + parseInt(newTransaction.amount), entBudget) && entBudget>0) {
+          if (isOvershootingBudget(entAmount + parseInt(newTransaction.amount), entBudget) && entBudget>0) {
             console.log(entBudget)
             alert("Overshooting Entertainment Budget");
             return;
           }
           break;
         case "education":
-          if (isOvershootingBudget("education", eduAmount + parseInt(newTransaction.amount), eduBudget) && eduBudget>0) {
+          if (isOvershootingBudget(eduAmount + parseInt(newTransaction.amount), eduBudget) && eduBudget>0) {
             alert("Overshooting Education Budget");
             return;
           }
           break;
         case "transportation":
-          if (isOvershootingBudget("transportation", transpAmount + parseInt(newTransaction.amount), transpBudget) && transpBudget>0) {
+          if (isOvershootingBudget(transpAmount + parseInt(newTransaction.amount), transpBudget) && transpBudget>0) {
             alert("Overshooting Transportation Budget");
             return;
           }
           break;
         case "bills":
-          if (isOvershootingBudget("bills", billsAmount + parseInt(newTransaction.amount), billsBudget) && billsBudget>0) {
+          if (isOvershootingBudget(billsAmount + parseInt(newTransaction.amount), billsBudget) && billsBudget>0) {
             alert("Overshooting Bills Budget");
             return;
           }
           break;
         case "miscellaneous":
-          if (isOvershootingBudget("miscellaneous", miscAmount + parseInt(newTransaction.amount), miscBudget) && miscBudget>0) {
+          if (isOvershootingBudget(miscAmount + parseInt(newTransaction.amount), miscBudget) && miscBudget>0) {
             alert("Overshooting Miscellaneous Budget");
             return;
           }
           break;
         case "medical":
-          if (isOvershootingBudget("medical", medicalAmount + parseInt(newTransaction.amount), medicalBudget) && medicalBudget>0) {
+          if (isOvershootingBudget(medicalAmount + parseInt(newTransaction.amount), medicalBudget) && medicalBudget>0) {
             alert("Overshooting Medical Budget");
             return;
           }
