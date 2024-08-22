@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import ExpenseIncome from './pages/ExpenseIncome';
 import Profile from './pages/Profile';
 import TransactionHistory from './pages/TransactionHistory';
+import BudgetAdd from './pages/BudgetAdd';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/transactionHistory' element={<TransactionHistory/>}/>
+            <Route path='/budget' element={<BudgetAdd/>}/>
             <Route path='/' element={<Navigate replace to="/landingPage" />} />
           </Routes>
         </BrowserRouter>

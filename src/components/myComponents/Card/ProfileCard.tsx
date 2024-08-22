@@ -11,7 +11,7 @@ function ProfileCard() {
   const [renderTrigger, setRenderTrigger] = useState(0);
 
   useEffect(() => {
-    const request = indexedDB.open("uuDB5", 1);
+    const request = indexedDB.open("uuDB11", 1);
 
     request.onsuccess = function (event) {
       const db = (event.target as IDBOpenDBRequest).result;
@@ -44,7 +44,7 @@ function ProfileCard() {
   }, [renderTrigger]);
 
   const updateUserInDB = (newUser: User) => {
-    const request = indexedDB.open("uuDB5", 1);
+    const request = indexedDB.open("uuDB11", 1);
 
     request.onsuccess = function (event) {
       const db = (event.target as IDBOpenDBRequest).result;
@@ -140,6 +140,7 @@ function ProfileCard() {
                   name: name || "",
                   password: password || "",
                   transactions: user.transactions || [],
+                  budget: user.budget || []
                 };
                 updateUserInDB(newUser);
               }

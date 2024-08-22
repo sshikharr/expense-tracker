@@ -55,6 +55,9 @@ function TopbarDashboard(){
                                 navigate('/profile')
                             }}>Profile</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{
+                                navigate('/budget')
+                            }}>Add Budget</DropdownMenuItem>
+                            <DropdownMenuItem onClick={()=>{
                                 navigate('/transactionHistory')
                             }}>History</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{

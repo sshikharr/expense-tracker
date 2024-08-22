@@ -46,7 +46,7 @@ function Signin() {
   }, [currentSession]);
 
   function onSubmit(values: z.infer<typeof signinSchema>) {
-    const request = indexedDB.open("uuDB5", 1);
+    const request = indexedDB.open("uuDB11", 1);
 
     request.onupgradeneeded = function (event) {
       const db = (event.target as IDBOpenDBRequest).result;
@@ -71,6 +71,7 @@ function Signin() {
             name: user.name,
             password: user.password,
             transactions: user.transactions,
+            budget: user.budget
           };
           if (user.password === values.password) {
             setCurrentSession(true);

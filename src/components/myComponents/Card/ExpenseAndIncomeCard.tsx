@@ -15,7 +15,7 @@ import Description from "../ExpenseAndIncomeComp/Description";
 
 import IncomeCategory from "../ExpenseAndIncomeComp/IncomeCategory";
 import { useRecoilState } from "recoil";
-import { Transactions, user } from "../../../store/store1";
+import { Budget, Transactions, User, user } from "../../../store/store1";
 import TransactionRadio from "../ExpenseAndIncomeComp/TransactionRadio";
 import { useRef, useState, useEffect } from "react";
 
@@ -27,6 +27,99 @@ function ExpenseAndIncomeCard() {
   const [type, setType] = useState("");
   const [date, setDate] = useState<Date | null>(null);
   const [description, setDescription] = useState("");
+
+  let allExpenseTransactions: Transactions[] = [];
+  let allEntBudget: Budget[] = [];
+  let allEduBudget: Budget[] = [];
+  let allTranspBudget: Budget[] = [];
+  let allMedicalBudget: Budget[] = [];
+  let allMiscBudget: Budget[] = [];
+  let allBillsBudget: Budget[] = [];
+
+  const userString = localStorage.getItem("storedUser");
+  if (userString === null) {
+    console.log("No user yet");
+  } else {
+    const user: User = JSON.parse(userString)
+    const allTransactions: Transactions[] = user.transactions;
+    const allBudget: Budget[] = user.budget;
+    allExpenseTransactions = allTransactions.filter(transaction => transaction.type === "expense");
+    allEntBudget = allBudget.filter(budget=> budget.category === "entertainment");
+    allEduBudget = allBudget.filter(budget=> budget.category === "education");
+    allTranspBudget = allBudget.filter(budget=> budget.category === "transportation");
+    allMedicalBudget = allBudget.filter(budget=> budget.category === "medical");
+    allMiscBudget = allBudget.filter(budget=> budget.category === "miscellaneous");
+    allBillsBudget = allBudget.filter(budget=> budget.category === "bills")
+  }
+
+  let entAmount = 0;
+  let eduAmount = 0;
+  let transpAmount = 0;
+  let billsAmount = 0;
+  let medicalAmount = 0;
+  let miscAmount = 0;
+
+  let entBudget=0;
+  let eduBudget=0;
+  let transpBudget=0;
+  let billsBudget=0;
+  let medicalBudget=0;
+  let miscBudget=0;
+
+  for (let i = 0; i < allExpenseTransactions.length; i++) {
+    const transaction = allExpenseTransactions[i];
+    if(transaction.category==="entertainment"){
+      entAmount += parseInt(transaction.amount)
+    }else if(transaction.category==="education"){
+      eduAmount += parseInt(transaction.amount)
+    }else if(transaction.category==="transportation"){
+      transpAmount += parseInt(transaction.amount)
+    }else if(transaction.category==="bills"){
+      billsAmount += parseInt(transaction.amount)
+    }else if(transaction.category==="medical"){
+      medicalAmount += parseInt(transaction.amount)
+    }else{
+      miscAmount += parseInt(transaction.amount)
+    }
+    
+}
+
+  if (allEntBudget.length > 0) {
+    for (const budget of allEntBudget) {
+      entBudget += parseInt(budget.amount);
+    }
+  }
+
+  if (allEduBudget.length > 0) {
+    for (const budget of allEduBudget) {
+      eduBudget += parseInt(budget.amount);
+    }
+  }
+
+  if (allTranspBudget.length > 0) {
+    for (const budget of allTranspBudget) {
+      transpBudget += parseInt(budget.amount);
+    }
+  }
+
+  if (allMedicalBudget.length > 0) {
+    for (const budget of allMedicalBudget) {
+      medicalBudget += parseInt(budget.amount);
+    }
+  }
+
+  if (allBillsBudget.length > 0) {
+    for (const budget of allBillsBudget) {
+      billsBudget += parseInt(budget.amount);
+    }
+  }
+
+  if (allMiscBudget.length > 0) {
+    for (const budget of allMiscBudget) {
+      miscBudget += parseInt(budget.amount);
+    }
+  }
+
 
   useEffect(() => {
     const storedUser = localStorage.getItem("storedUser");
@@ -49,7 +142,7 @@ function ExpenseAndIncomeCard() {
   };
 
   const updateUserTransactionsInDB = (newTransaction: Transactions, callback: () => void) => {
-    const request = indexedDB.open("uuDB5", 1);
+    const request = indexedDB.open("uuDB11", 1);
     request.onupgradeneeded = function (event) {
       const db = (event.target as IDBOpenDBRequest).result;
       if (!db.objectStoreNames.contains("users")) {
@@ -138,7 +231,54 @@ function ExpenseAndIncomeCard() {
                 amount: amount,
                 description: description,
               };
-              if (
+              const isOvershootingBudget = (category: string, amount: number, budget: number) => {
+      return amount > budget;
+    };
+
+    if (newTransaction.type === "expense") {
+      switch (newTransaction.category) {
+        case "entertainment":
+          if (isOvershootingBudget("entertainment", entAmount + parseInt(newTransaction.amount), entBudget) && entBudget>0) {
+            console.log(entBudget)
+            alert("Overshooting Entertainment Budget");
+            return;
+          }
+          break;
+        case "education":
+          if (isOvershootingBudget("education", eduAmount + parseInt(newTransaction.amount), eduBudget) && eduBudget>0) {
+            alert("Overshooting Education Budget");
+            return;
+          }
+          break;
+        case "transportation":
+          if (isOvershootingBudget("transportation", transpAmount + parseInt(newTransaction.amount), transpBudget) && transpBudget>0) {
+            alert("Overshooting Transportation Budget");
+            return;
+          }
+          break;
+        case "bills":
+          if (isOvershootingBudget("bills", billsAmount + parseInt(newTransaction.amount), billsBudget) && billsBudget>0) {
+            alert("Overshooting Bills Budget");
+            return;
+          }
+          break;
+        case "miscellaneous":
+          if (isOvershootingBudget("miscellaneous", miscAmount + parseInt(newTransaction.amount), miscBudget) && miscBudget>0) {
+            alert("Overshooting Miscellaneous Budget");
+            return;
+          }
+          break;
+        case "medical":
+          if (isOvershootingBudget("medical", medicalAmount + parseInt(newTransaction.amount), medicalBudget) && medicalBudget>0) {
+            alert("Overshooting Medical Budget");
+            return;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+              if(
                 newTransaction.type === "" ||
                 newTransaction.date === null ||
                 newTransaction.category === "" ||

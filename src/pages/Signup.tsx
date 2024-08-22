@@ -76,8 +76,9 @@ export function Signup() {
       name: values.name,
       password: values.password,
       transactions: [],
+      budget:[]
     };
-    const request = indexedDB.open("uuDB5", 1);
+    const request = indexedDB.open("uuDB11", 1);
 
     request.onupgradeneeded = function (event) {
       const db = (event.target as IDBOpenDBRequest).result;

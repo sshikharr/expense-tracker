@@ -10,36 +10,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu"
-import { Button } from "../../ui/button";
 
-function TopbarProfile(){
+function TopbarBudget(){
     const navigate = useNavigate();
-    return(<>
-    <div className=" flex flex-row justify-between min-w-fit p-3 bg-gradient-to-br from-orange-100 to-purple-100 dark:from-slate-950 dark:to-slate-950">
+    return(
+        <>
+        <div className=" flex flex-row justify-between w-full p-3 bg-gradient-to-br from-orange-100 to-purple-100 dark:from-slate-950 dark:to-slate-950">
             <div className=" flex items-center ml-2 hover:cursor-pointer gap-x-6" onClick={()=>{
                 navigate('/dashboard')
             }}>
                 <Wallet size={30}/>
-                <div className="md:text-xl font-semibold text-xs">
+                <div className="text-xl font-semibold ">
                     <h1>Expense Tracker</h1>
                 </div>
             </div>
             <div className="flex flex-row focus:bg-white">
                 <div className="flex flex-row px-2 py-1 font-semibold text-base leading-tight gap-x-6">
-
-
-                    <Button onClick={()=>{
-                        navigate('/transactions')
-                    }}
-                    className=" hidden sm:block">Add transaction</Button>
-
-
-                    <Button onClick={()=>{
-                        navigate('/transactions')
-                    }}
-                    className=" block sm:hidden">+</Button>
-
-
+                    
                     <div className="mx-4 hover:cursor-pointer hover:underline"><ModeToggle/></div>
                     <DropdownMenu>
                         <DropdownMenuTrigger>
@@ -55,17 +42,14 @@ function TopbarProfile(){
                                 navigate('/dashboard')
                             }}>Dashboard</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{
-                                navigate('/budget')
-                            }}>Add Budget</DropdownMenuItem>
+                                navigate('/transactionHistory')
+                            }}>History</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{
                                 navigate('/profile')
                             }}>Profile</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{
-                                navigate('/transactionHistory')
-                            }}>History</DropdownMenuItem>
-                            <DropdownMenuItem onClick={()=>{
                                 localStorage.clear();
-                                navigate('/landingPage')
+                                navigate('/landingPage')            
                             }}>Sign out</DropdownMenuItem>
                         </DropdownMenuContent>
                         </DropdownMenu>
@@ -73,7 +57,8 @@ function TopbarProfile(){
                 </div>
             </div>
     </div>
-    </>)
+        </>
+    )
 }
 
-export default TopbarProfile;
+export default TopbarBudget;

@@ -43,6 +43,9 @@ function TopbarTransaction(){
                                 navigate('/dashboard')
                             }}>Dashboard</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{
+                                navigate('/budget')
+                            }}>Add Budget</DropdownMenuItem>
+                            <DropdownMenuItem onClick={()=>{
                                 navigate('/profile')
                             }}>Profile</DropdownMenuItem>
                             <DropdownMenuItem onClick={()=>{

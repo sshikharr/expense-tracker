@@ -21,11 +21,17 @@ export interface Transactions {
     description: string;
 }
 
+export interface Budget {
+    category: string,
+    amount: string
+}
+
 export interface User {
     username: string;
     name: string;
     password: string;
     transactions: Transactions[];
+    budget: Budget[]
 }
 
 export interface UserArray {
@@ -38,7 +44,8 @@ export const user = atom<User>({
         username: "",
         name: "",
         password: "",
-        transactions: []
+        transactions: [],
+        budget:[]
     }),
     effects: [
         ({ onSet }) => {
